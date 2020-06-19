@@ -115,3 +115,15 @@ https://zookeeper.apache.org/releases.html
 	3. Delete Topic: 
        kafka-run-class.bat kafka.admin.TopicCommand --delete --topic [topic_to_delete] --zookeeper localhost:2181
 
+
+
+-----------  Let us write Spark Stream Program -------------
+1. Setup scala and spark environment, below is Git URL and YouTube Link-
+
+2. Additionally downloaded below 2 jars and add into build path-
+	org.apache.servicemix.bundles.kafka-clients-2.5.0_1
+	spark-streaming-kafka-0-10_2.12-2.4.0
+	
+3. KafkaSparkStreaming.scala in this repository.
+
+
