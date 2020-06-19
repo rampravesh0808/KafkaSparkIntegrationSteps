@@ -1,5 +1,7 @@
 ------------- Configure Kafka on Windows -----------
+
 Step-1: Install and Configure Zookeeper.
+
 Step-2: Install and Configure Kafka.
 
 
@@ -10,8 +12,8 @@ https://zookeeper.apache.org/releases.html
 
 2. Right-click on the file, and extract it at the same location using 7-zip.
 
-Note the -bin appended to the name. If you don’t see this then you’ve downloaded and extracted the wrong file. Go back to the mirror.
-This is important otherwise when you start the Zookeeper server, you’ll get an error like this
+   Note the -bin appended to the name. If you don’t see this then you’ve downloaded and extracted the wrong file. Go back to the mirror.
+   This is important otherwise when you start the Zookeeper server, you’ll get an error like this
 
 3. Copy the Zookeeper folder at as you want as installation files.
 
@@ -39,7 +41,7 @@ This is important otherwise when you start the Zookeeper server, you’ll get an
 
 
 
------ Step-2: Install and Configure Kafka.-------
+   ----- Step-2: Install and Configure Kafka.-------
 1. Download the Kafka as per your Scala Version from official site.
 	https://kafka.apache.org/downloads
 	
@@ -64,7 +66,7 @@ This is important otherwise when you start the Zookeeper server, you’ll get an
 
 	 d) By default, Apache Kafka will run on port 9092 and Apache Zookeeper will run on port 2181.
 
-With that our configuration for Kafka is done. Let’s fire up the server.
+   With that our configuration for Kafka is done. Let’s fire up the server.
 
 
 5. To Running Kafka: Make sure that Zookeeper server is still running.
@@ -75,14 +77,41 @@ With that our configuration for Kafka is done. Let’s fire up the server.
 7. Run the below command to start kafka server 
 	kafka-server-start.bat C:\kafka_2.12-2.5.0\config\server.properties
 	
-You’ll see some activity in your Zookeeper terminal. It might take a new snapshot and start a new log file. At this point your Kafka is up and running.
+   You’ll see some activity in your Zookeeper terminal. It might take a new snapshot and start a new log file. At this point your Kafka is up and running.
 
-Keep in Mind:
-The dataDir which we set up as the logs directory will start to fill up pretty fast with the snapshots.	So clean this directory yourself. 
+   Keep in Mind:
+		The dataDir which we set up as the logs directory will start to fill up pretty fast with the snapshots.	So clean this directory yourself. 
+		
+		
+		
+----------- Create Topic ---------
+
+1. kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+
+
+----------- Creating a Producer and Consumer to Test Server ---------------
+
+	kafka-console-producer.bat --broker-list localhost:9092 --topic test
+
+
+	Before kafka version 2.0 (<2.0):
+	kafka-console-consumer.bat --zookeeper localhost:2181 --topic test
+
+	After kafka version 2.0 (>= 2.0): 
+	kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic test
 	
 	
+	Now type anything in the producer command prompt and press Enter, and you should be able to see the message in the other consumer command prompt.
 	
+
+---------- Frequently Used some userful command ---------------	
 	
+	1. List Topics:
+	   kafka-topics.bat --list --zookeeper localhost:2181 
 	
+	2. Describe Topic: 
+	   kafka-topics.bat --describe --zookeeper localhost:2181 --topic [Topic Name]
 	
-	
+	3. Delete Topic: 
+       kafka-run-class.bat kafka.admin.TopicCommand --delete --topic [topic_to_delete] --zookeeper localhost:2181
+
