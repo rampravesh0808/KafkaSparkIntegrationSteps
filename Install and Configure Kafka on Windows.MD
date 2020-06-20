@@ -11,7 +11,7 @@ Step-2: Install and Configure Kafka.
 
 1. Dowload the Zookeeper from officail site -
 
-https://zookeeper.apache.org/releases.html
+   https://zookeeper.apache.org/releases.html
 
 2. Right-click on the file, and extract it at the same location using 7-zip.
 
